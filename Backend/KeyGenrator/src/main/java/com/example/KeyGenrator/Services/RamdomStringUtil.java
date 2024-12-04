@@ -39,23 +39,19 @@ public class RamdomStringUtil {
         genrateFreshKey(len);
     }
 
-    public Boolean genrateFreshKey(int lenght){
-
-        List<String> fkeys = IntStream.range(0,lenght)
-                .mapToObj((i)->genrateKeys(6)).distinct().collect(Collectors.toList());
-        System.out.println("Size"+fkeys.size());
-
-
-
-        fkeys.removeAll(freshKeyRepo.getDuplicatekeys(fkeys));
-        fkeys.removeAll(freshKeyRepo.getDuplicatekeys(fkeys));
-
-        List<FreshKey> freshKeyData =  fkeys.stream().map(a -> new FreshKey(a,new Date())).collect(Collectors.toList());
-        System.out.println("Size"+fkeys.size());
-        freshKeyRepo.saveAll(freshKeyData);
-
-
-        return false;
+    public Boolean genrateFreshKey(int length){
+        try{
+            List<String> fkeys = IntStream.range(0,length)
+                    .mapToObj((i)->genrateKeys(6)).distinct().collect(Collectors.toList());
+            fkeys.removeAll(freshKeyRepo.getDuplicatekeys(fkeys));
+            fkeys.removeAll(freshKeyRepo.getDuplicatekeys(fkeys));
+            List<FreshKey> freshKeyData =  fkeys.stream().map(a -> new FreshKey(a,new Date())).collect(Collectors.toList());
+            System.out.println("Size"+fkeys.size());
+            freshKeyRepo.saveAll(freshKeyData);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 

@@ -6,6 +6,5 @@ import lombok.Data;
 public class LongUrlUserId {
 
     String longUrl;
-    Integer userId;
 
 }

@@ -1,0 +1,19 @@
+# Use the official Tomcat image as the base image
+FROM tomcat:9.0-jdk17-temurin
+
+# Set environment variables for Tomcat (optional)
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $CATALINA_HOME/bin:$PATH
+
+# Remove default ROOT application from Tomcat webapps
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
+
+# Copy the Spring Boot WAR file into the webapps directory and rename it to ROOT.war
+# so it runs at the root context
+COPY target/KeyGenrator.war /usr/local/tomcat/webapps/KeyGenrator.war
+
+# Expose the port that Tomcat runs on
+EXPOSE 8080
+
+# Start Tomcat
+CMD ["catalina.sh", "run"]

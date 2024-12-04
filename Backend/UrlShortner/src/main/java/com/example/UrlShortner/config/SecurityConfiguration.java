@@ -16,7 +16,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         System.out.println("*********************JWT***************************");
-       // http.authorizeHttpRequests((requests) -> requests.requestMatchers("/api/**").permitAll().anyRequest().authenticated());
+      http.authorizeHttpRequests((requests) -> requests.requestMatchers("/api/auth/**","/s/**").permitAll().anyRequest().authenticated());
         http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.csrf(AbstractHttpConfigurer::disable);
         http.oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults()));

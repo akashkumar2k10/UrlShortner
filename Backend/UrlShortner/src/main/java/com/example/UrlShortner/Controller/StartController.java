@@ -11,8 +11,8 @@ import java.util.List;
 @RestController
 public class StartController {
 
-    @Autowired
-    UserRepo userRepo;
+//    @Autowired
+//    UserRepo userRepo;
     @GetMapping("/")
     public String start(){
         return "Hello world";

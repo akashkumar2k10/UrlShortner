@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("api/")
+@RequestMapping("api/auth/")
 @CrossOrigin(origins = "*")
 public class AuthController {
     @Value("${spring.security.oauth2.client.registration.google.client-id}")
@@ -46,7 +47,7 @@ public class AuthController {
                     .queryParam("response_type", "code")
                     .queryParam("client_id", clientId)
                     .queryParam("scope", "openid profile email")
-                    .queryParam("redirect_uri", "http://localhost:8081/api/getToken");
+                    .queryParam("redirect_uri", "http://localhost:8081/api/auth/getToken");
 
 
             String googleAuthUrl = builder.toUriString();
@@ -70,16 +71,15 @@ public class AuthController {
             .queryParam("client_secret", clientSecret)
             .queryParam("code", code)
             .queryParam("grant_type", "authorization_code")
-            .queryParam("redirect_uri", "http://localhost:8081/api/getToken"); // Provide your redirect URI
+            .queryParam("redirect_uri", "http://localhost:8081/api/auth/getToken"); // Provide your redirect URI
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.postForEntity(builder.toUriString(), null, String.class);
         Tokens token = null;
        try {
-            token = new ObjectMapper().readValue(response.getBody(), Tokens.class);
+           token = new ObjectMapper().readValue(response.getBody(), Tokens.class);
            httpServletResponse.sendRedirect("http://localhost:4200/success?AccessToken="+token.getAccess_token()+"&IdToken="+token.getId_token());
        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -92,11 +92,16 @@ public class AuthController {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(userInfoEndpoint)
             .queryParam("access_token", accessToken);
 
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity(builder.toUriString(), String.class);
-        GoogleUser googleUser = new ObjectMapper().readValue(response.getBody(), GoogleUser.class);
-        createUser(googleUser);
-        return ResponseEntity.ok(googleUser);
+        try{
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<String> response = restTemplate.getForEntity(builder.toUriString(), String.class);
+            GoogleUser googleUser = new ObjectMapper().readValue(response.getBody(), GoogleUser.class);
+            createUser(googleUser);
+            return ResponseEntity.ok(googleUser);
+        }catch(Exception e){
+            System.out.println(e);
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("logout")
@@ -108,13 +113,13 @@ public class AuthController {
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.postForEntity(builder.toUriString(), null, String.class);
-
-        if (response.getStatusCode() == HttpStatus.OK) {
-            // Invalidate the session or clear any application-specific authentication state here.
-            return ResponseEntity.ok("User logged out successfully.");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to logout user.");
-        }
+        return response;
+//        if (response.getStatusCode() == HttpStatus.OK) {
+//            // Invalidate the session or clear any application-specific authentication state here.
+//            return ResponseEntity.ok("User logged out successfully.");
+//        } else {
+//            return ResponseEntity.status(response.getStatusCode()).body("Failed to logout user.");
+//        }
     }
 
 
