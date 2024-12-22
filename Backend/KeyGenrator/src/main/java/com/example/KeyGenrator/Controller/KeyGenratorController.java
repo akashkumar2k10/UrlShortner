@@ -21,12 +21,6 @@ import java.util.List;
 @RequestMapping(value = "/api/key",produces = MediaType.APPLICATION_JSON_VALUE)
 @Log4j2
 public class KeyGenratorController {
-    @Autowired
-    private FreshKeyRepo freshKeyRepo;
-
-    @Autowired
-    private UsedKeyRepo usedKeyRepo;
-
 
     @Autowired
     RamdomStringUtil ramdomStringUtil;
