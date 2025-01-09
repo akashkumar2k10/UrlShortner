@@ -17,7 +17,7 @@ services:
     container_name: mysql-url
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: UrlShortner # Initial database for service1
+      MYSQL_DATABASE: UrlShortner
     ports:
       - "3308:3306"
     volumes:
@@ -28,7 +28,7 @@ services:
     container_name: mysql-key
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: KeyGenrator # Initial database for service1
+      MYSQL_DATABASE: KeyGenrator
     ports:
       - "3307:3306"
     volumes:
