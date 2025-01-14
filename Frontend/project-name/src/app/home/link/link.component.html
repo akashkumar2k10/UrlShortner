@@ -16,6 +16,7 @@
     <button type="submit" [disabled]="simpleForm.invalid">Submit</button>
   </form>
 
+
   <!-- List of links -->
   <div class="list-group">
     <div *ngFor="let link of links" class="list-group-item list-group-item-action">
@@ -23,9 +24,16 @@
         <a href="{{'http://localhost:8081/s/' + link.shortUrl}}" target="_blank"><h5 class="mb-1">{{link.shortUrl}}</h5></a>
         <small>
           <button class="btn btn-sm btn-outline-danger" (click)="deleteLink(link.id)">Delete</button>
+          <button class="btn btn-sm btn-outline-warning" (click)="disableLink(link.id)">Disable</button>
+          
         </small>
       </div>
       <p class="mb-1">{{link.longUrl}}</p>
+      <p class="mb-1">{{link.validTill}}</p>
     </div>
   </div>
+
+
+
+  
 </div>

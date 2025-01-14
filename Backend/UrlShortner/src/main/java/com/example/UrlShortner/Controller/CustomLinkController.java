@@ -7,40 +7,36 @@ import com.example.UrlShortner.Services.UrlService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
 @RestController
 @Log4j2
-@RequestMapping("/api/url")
+@RequestMapping("api/custom/url")
 @CrossOrigin(origins = "*")
-public class UrlController {
-
+public class CustomLinkController {
     @Autowired
     UrlService urlService;
 
     @GetMapping
-    public List<MapShortLongUrl> getAllDefaultUrl(){
+    public List<MapShortLongUrl> getAll() {
         log.info("GET ALL BY USER");
-        return urlService.getAllUrlByUser(UrlType.Default);
+        return urlService.getAllUrlByUser(UrlType.Custom);
     }
 
     @PostMapping
-    public MapShortLongUrl createMapping(@RequestBody LongUrlUserId longUrlUserId){
-        return urlService.createMap(longUrlUserId,longUrlUserId.getUrlType());
+    public MapShortLongUrl createMapping(@RequestBody LongUrlUserId longUrlUserId) {
+        return urlService.createMap(longUrlUserId, UrlType.Custom);
     }
 
     @PutMapping
-    public MapShortLongUrl update(@RequestBody LongUrlUserId longUrlUserId){
+    public MapShortLongUrl update(@RequestBody LongUrlUserId longUrlUserId) {
         return urlService.update(longUrlUserId);
     }
 
     @PostMapping("delete/{id}")
-    public Boolean delete(@PathVariable Integer id){
+    public Boolean delete(@PathVariable Integer id) {
         return urlService.delete(id);
     }
-
-
 
 }

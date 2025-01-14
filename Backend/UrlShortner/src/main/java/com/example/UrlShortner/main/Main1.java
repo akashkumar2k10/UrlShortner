@@ -1,18 +1,11 @@
 package com.example.UrlShortner.main;
 
-import com.example.UrlShortner.Services.FunctionService;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
-
 import java.security.Key;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 
 public class Main1 {
     public static void main(String[] args) {

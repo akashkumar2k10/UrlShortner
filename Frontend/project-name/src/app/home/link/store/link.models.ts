@@ -8,10 +8,20 @@ export interface Link {
   id: number;
   longUrl: string;
   shortUrl: string;
+  isDisabled: Boolean;
+  validTill: string;
 }
 
 export interface LinkPayload {
   id?: number;
-  longUrl: string;
+  longUrl?: string;
   userId?: number;
+  isDisabled?: boolean;
+  isDeleted?: boolean;
+  urlType?: UrlType;
+}
+
+export enum UrlType {
+  Default,
+  Custom,
 }

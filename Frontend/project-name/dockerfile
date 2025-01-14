@@ -1,0 +1,14 @@
+# Stage 1: Build the application
+FROM node:22 AS build
+WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Stage 2: Serve the application with Nginx
+FROM nginx:1.17.1-alpine
+COPY --from=build /usr/src/app/dist/* /usr/share/nginx/html
+# Assuming nginx.conf is missing, we'll use the default configuration
+# If nginx.conf is intended to be used, ensure it exists in the project directory
+# and adjust the COPY command accordingly

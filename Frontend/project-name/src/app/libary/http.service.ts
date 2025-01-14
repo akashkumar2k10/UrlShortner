@@ -26,22 +26,11 @@ export class HttpService {
     return this.http.post<T>(url, body, this.authHeader(token));
   }
 
-  public put<T>(
-    url: string,
-    body: any,
-    headers?: HttpHeaders,
-    params?: HttpParams,
-    token?: string
-  ): Observable<T> {
-    return this.http.put<T>(url, body);
+  public put<T>(url: string, body: any, token?: string): Observable<T> {
+    return this.http.put<T>(url, body, this.authHeader(token));
   }
 
-  public delete<T>(
-    url: string,
-    headers?: HttpHeaders,
-    params?: HttpParams,
-    token?: string
-  ): Observable<T> {
-    return this.http.delete<T>(url);
+  public delete<T>(url: string, token?: string): Observable<T> {
+    return this.http.delete<T>(url, this.authHeader(token));
   }
 }

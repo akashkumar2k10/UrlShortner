@@ -12,8 +12,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @Log4j2
-@RequestMapping("/s")
-public class ShortUrl {
+@RequestMapping("/c")
+public class CustomShortUrl {
 
     String ErrorPage = "http://localhost:4200/error";
 
@@ -22,7 +22,7 @@ public class ShortUrl {
 
     @GetMapping("/{id}")
     public RedirectView getLongUrl(@PathVariable("id") String id) throws Exception {
-        return urlService.getLongUrlByShortId(id, UrlType.Default);
+        return urlService.getLongUrlByShortId(id, UrlType.Custom);
     }
 
 }

@@ -21,11 +21,11 @@ export class LinkService {
     return this.http.post<Link>(apis.link, payload, token);
   }
 
-  updateLink(payload: LinkPayload): Observable<Link> {
-    return this.http.put<Link>(`${apis.link}/${payload.id}`, { payload });
+  updateLink(payload: LinkPayload, token: string): Observable<Link> {
+    return this.http.put<Link>(apis.link, payload, token);
   }
 
-  deleteLink(id: number): Observable<void> {
-    return this.http.delete<void>(`${apis.link}/${id}`);
+  deleteLink(id: number, token): Observable<boolean> {
+    return this.http.post<boolean>(`${apis.link}/delete/${id}`, {}, token);
   }
 }

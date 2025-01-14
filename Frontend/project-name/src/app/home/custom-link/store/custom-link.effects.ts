@@ -9,13 +9,13 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { LinkService } from './link.service';
-import * as LinkActions from './link.actions';
+import { CustomLinkService } from './custom-link.services';
+import * as CustomLinkActions from './custom-link.actions';
 import { Store } from '@ngrx/store';
 import { getAccessToken, getIdToken } from '../../../auth/store/auth.selector';
 
 @Injectable()
-export class LinkEffects {
+export class CustomLinkEffects {
   // loadLinks$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(LinkActions.loadLinks),
@@ -31,13 +31,15 @@ export class LinkEffects {
 
   loadLinks$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LinkActions.loadLinks),
+      ofType(CustomLinkActions.loadLinks),
       withLatestFrom(this.store.select(getIdToken)),
       tap(([action, token]) => console.log('Token:', token)), // Logs the token
       concatMap(([action, token]) =>
         this.linkService.getLinks(token).pipe(
-          map((links) => LinkActions.loadLinksSuccess({ links })),
-          catchError((error) => of(LinkActions.loadLinksFailure({ error })))
+          map((links) => CustomLinkActions.loadLinksSuccess({ links })),
+          catchError((error) =>
+            of(CustomLinkActions.loadLinksFailure({ error }))
+          )
         )
       )
     )
@@ -45,12 +47,12 @@ export class LinkEffects {
 
   addLink$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LinkActions.addLink),
+      ofType(CustomLinkActions.addLink),
       withLatestFrom(this.store.select(getIdToken)),
       mergeMap(([action, token]) =>
         this.linkService.addLink(action.link, token).pipe(
-          map((link) => LinkActions.addLinkSuccess({ link })),
-          catchError((error) => of(LinkActions.addLinkFailure({ error })))
+          map((link) => CustomLinkActions.addLinkSuccess({ link })),
+          catchError((error) => of(CustomLinkActions.addLinkFailure({ error })))
         )
       )
     )
@@ -58,12 +60,14 @@ export class LinkEffects {
 
   updateLink$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LinkActions.updateLink),
+      ofType(CustomLinkActions.updateLink),
       withLatestFrom(this.store.select(getIdToken)),
       mergeMap(([action, token]) =>
         this.linkService.updateLink(action.link, token).pipe(
-          map((link) => LinkActions.updateLinkSuccess({ link })),
-          catchError((error) => of(LinkActions.updateLinkFailure({ error })))
+          map((link) => CustomLinkActions.updateLinkSuccess({ link })),
+          catchError((error) =>
+            of(CustomLinkActions.updateLinkFailure({ error }))
+          )
         )
       )
     )
@@ -71,12 +75,14 @@ export class LinkEffects {
 
   deleteLink$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LinkActions.deleteLink),
+      ofType(CustomLinkActions.deleteLink),
       withLatestFrom(this.store.select(getIdToken)),
       mergeMap(([action, token]) =>
         this.linkService.deleteLink(action.id, token).pipe(
-          map(() => LinkActions.deleteLinkSuccess({ id: action.id })),
-          catchError((error) => of(LinkActions.deleteLinkFailure({ error })))
+          map(() => CustomLinkActions.deleteLinkSuccess({ id: action.id })),
+          catchError((error) =>
+            of(CustomLinkActions.deleteLinkFailure({ error }))
+          )
         )
       )
     )
@@ -84,7 +90,7 @@ export class LinkEffects {
 
   constructor(
     private actions$: Actions,
-    private linkService: LinkService,
+    private linkService: CustomLinkService,
     private store: Store
   ) {}
 }

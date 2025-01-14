@@ -1,55 +1,55 @@
 import { createAction, props } from '@ngrx/store';
-import { Link, LinkPayload } from './link.models';
+import { CustomLink, CustomLinkPayload } from './custom-link.models';
 
 // Load Links
-export const loadLinks = createAction('[Link] Load Links');
+export const loadLinks = createAction('[Custom Link] Load Links');
 export const loadLinksSuccess = createAction(
-  '[Link] Load Links Success',
-  props<{ links: Link[] }>()
+  '[Custom Link] LoadCustom LinkSuccess',
+  props<{ links: CustomLink[] }>()
 );
 export const loadLinksFailure = createAction(
-  '[Link] Load Links Failure',
+  '[Custom Link] LoadCustom LinkFailure',
   props<{ error: any }>()
 );
 
 // Add Link
 export const addLink = createAction(
-  '[Link] Add Link',
-  props<{ link: LinkPayload }>()
+  '[Custom Link] Add Link',
+  props<{ link: CustomLinkPayload }>()
 );
 export const addLinkSuccess = createAction(
-  '[Link] Add Link Success',
-  props<{ link: Link }>()
+  '[Custom Link] Add Custom Link Success',
+  props<{ link: CustomLink }>()
 );
 export const addLinkFailure = createAction(
-  '[Link] Add Link Failure',
+  '[Custom Link] Add Custom Link Failure',
   props<{ error: any }>()
 );
 
 // Update Link
 export const updateLink = createAction(
-  '[Link] Update Link',
-  props<{ link: LinkPayload }>()
+  '[Custom Link] Update Link',
+  props<{ link: CustomLinkPayload }>()
 );
 export const updateLinkSuccess = createAction(
-  '[Link] Update Link Success',
-  props<{ link: Link }>()
+  '[Custom Link] Update Custom Link Success',
+  props<{ link: CustomLink }>()
 );
 export const updateLinkFailure = createAction(
-  '[Link] Update Link Failure',
+  '[Custom Link] Update Custom Link Failure',
   props<{ error: any }>()
 );
 
 // Delete Link
 export const deleteLink = createAction(
-  '[Link] Delete Link',
+  '[Custom Link] Delete Link',
   props<{ id: number }>()
 );
 export const deleteLinkSuccess = createAction(
-  '[Link] Delete Link Success',
+  '[Custom Link] Delete Custom Link Success',
   props<{ id: number }>()
 );
 export const deleteLinkFailure = createAction(
-  '[Link] Delete Link Failure',
+  '[Custom Link] Delete Custom Link Failure',
   props<{ error: any }>()
 );

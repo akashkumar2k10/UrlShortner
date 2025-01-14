@@ -1,0 +1,46 @@
+:host {
+    display: block;
+    margin: 16px auto;
+    max-width: 300px;
+  }
+  
+  .box {
+    border: 1px solid #dddddd34;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #535151;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      color: #333;
+    }
+  
+    p {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: #666;
+    }
+  
+    button {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }

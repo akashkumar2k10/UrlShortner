@@ -1,5 +1,8 @@
 package com.example.UrlShortner.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.regex.Pattern;
 
 public class CommonUtil {
@@ -13,4 +16,13 @@ public class CommonUtil {
         Pattern pattern = Pattern.compile(EMAIL_REGEX);
         return pattern.matcher(email).matches();
     }
+
+    public static String logPayload(Object object) {
+        try {
+            return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            return "ERROR IN JSON";
+        }
+    }
+
 }
