@@ -82,6 +82,21 @@ export class LinkEffects {
     )
   );
 
+  generateQrCode$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LinkActions.generateQrCode),
+      withLatestFrom(this.store.select(getIdToken)),
+      mergeMap(([action, token]) =>
+        this.linkService.generateQrCode(action.id, token).pipe(
+          map((qrCode) => LinkActions.generateQrCodeSuccess({ qrCode })),
+          catchError((error) =>
+            of(LinkActions.generateQrCodeFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private linkService: LinkService,

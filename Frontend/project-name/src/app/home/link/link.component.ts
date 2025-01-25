@@ -57,7 +57,18 @@ export class LinkComponent {
     console.log('Disable - ', id);
     this.store.dispatch(actions.updateLink(this.genratePayloadForDisable(id)));
   }
+  enableLink(id: number) {
+    console.log('Enable - ', id);
+    this.store.dispatch(actions.updateLink(this.genratePayloadForEnable(id)));
+  }
   genratePayloadForDisable(id: number): { link: LinkPayload } {
     return { link: { id: id, isDisabled: true } };
+  }
+  genratePayloadForEnable(id: number): { link: LinkPayload } {
+    return { link: { id: id, isDisabled: false } };
+  }
+
+  generateQr(id: number): void {
+    this.store.dispatch(actions.generateQrCode({ id }));
   }
 }

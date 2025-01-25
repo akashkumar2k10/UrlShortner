@@ -53,3 +53,17 @@ export const deleteLinkFailure = createAction(
   '[Link] Delete Link Failure',
   props<{ error: any }>()
 );
+
+// Generate QR Code
+export const generateQrCode = createAction(
+  '[Link] Generate QR Code',
+  props<{ id: number }>()
+);
+export const generateQrCodeSuccess = createAction(
+  '[Link] Generate QR Code Success',
+  props<{ qrCode: string }>()
+);
+export const generateQrCodeFailure = createAction(
+  '[Link] Generate QR Code Failure',
+  props<{ error: any }>()
+);

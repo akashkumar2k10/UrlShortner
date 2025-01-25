@@ -7,4 +7,5 @@ export const apis = {
 
   link: `${host.url}/api/url`,
   customLink: `${host.url}/api/custom/url`,
+  qrCode: `${host.url}/api/Qr`,
 };

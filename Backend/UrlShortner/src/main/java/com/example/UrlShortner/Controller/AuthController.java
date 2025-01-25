@@ -29,6 +29,13 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("api/auth/")
 @CrossOrigin(origins = "*")
 public class AuthController {
+
+    @Value("${url.shortner.default.url}")
+    String backendUrl;
+    @Value("${frontend.url}")
+    String frontendUrl;
+
+
     @Value("${spring.security.oauth2.client.registration.google.client-id}")
     private String clientId;
 
@@ -47,7 +54,7 @@ public class AuthController {
                     .queryParam("response_type", "code")
                     .queryParam("client_id", clientId)
                     .queryParam("scope", "openid profile email")
-                    .queryParam("redirect_uri", "http://localhost:8081/api/auth/getToken");
+                    .queryParam("redirect_uri", backendUrl+"/api/auth/getToken");
 
 
             String googleAuthUrl = builder.toUriString();
@@ -71,14 +78,14 @@ public class AuthController {
             .queryParam("client_secret", clientSecret)
             .queryParam("code", code)
             .queryParam("grant_type", "authorization_code")
-            .queryParam("redirect_uri", "http://localhost:8081/api/auth/getToken"); // Provide your redirect URI
+            .queryParam("redirect_uri", backendUrl+"/api/auth/getToken"); // Provide your redirect URI
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.postForEntity(builder.toUriString(), null, String.class);
         Tokens token = null;
        try {
            token = new ObjectMapper().readValue(response.getBody(), Tokens.class);
-           httpServletResponse.sendRedirect("http://localhost:4200/success?AccessToken="+token.getAccess_token()+"&IdToken="+token.getId_token());
+           httpServletResponse.sendRedirect(frontendUrl+"/success?AccessToken="+token.getAccess_token()+"&IdToken="+token.getId_token());
        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

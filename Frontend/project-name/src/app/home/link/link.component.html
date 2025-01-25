@@ -25,6 +25,9 @@
         <small>
           <button class="btn btn-sm btn-outline-danger" (click)="deleteLink(link.id)">Delete</button>
           <button class="btn btn-sm btn-outline-warning" (click)="disableLink(link.id)">Disable</button>
+          <button class="btn btn-primary" (click)="generateQr(link.id)">Generate QR code</button>
+          <button class="btn btn-success" (click)="enableLink(link.id)">Enable</button>
+
           
         </small>
       </div>

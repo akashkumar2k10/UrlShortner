@@ -28,4 +28,8 @@ export class LinkService {
   deleteLink(id: number, token): Observable<boolean> {
     return this.http.post<boolean>(`${apis.link}/delete/${id}`, {}, token);
   }
+
+  generateQrCode(id: number, token: string): Observable<any> {
+    return this.http.get(`${apis.qrCode}?id=${id}`, token);
+  }
 }
