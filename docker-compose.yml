@@ -1,16 +1,16 @@
 version: '3.8'
 services:
 
-  urlshortner:
-    build:
-      context: ./Backend/UrlShortner # Path where the Dockerfile for the .war file is located
-      dockerfile: Dockerfile # Dockerfile used to build the Tomcat-based Spring Boot app
-    container_name: app-container
-    ports:
-      - "8081:8081" # Expose the app on port 8080
-    depends_on:
-      - mysql1
-      - redis
+#  urlshortner:
+#    build:
+#      context: ./Backend/UrlShortner # Path where the Dockerfile for the .war file is located
+#      dockerfile: Dockerfile # Dockerfile used to build the Tomcat-based Spring Boot app
+#    container_name: app-container
+#    ports:
+#      - "8081:8081" # Expose the app on port 8080
+#    depends_on:
+#      - mysql1
+#      - redis
 
   mysql1:
     image: mysql:8.0
@@ -34,27 +34,27 @@ services:
     volumes:
       - mysql-data2:/var/lib/mysql
 
-  redis:
-    image: redis:alpine
-    container_name: redis-key
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-
-  redis-commander:
-    image: rediscommander/redis-commander:latest
-    container_name: redis-commander-container
-    environment:
-      - REDIS_HOSTS=local:redis:6379
-    ports:
-      - "8089:8081"
-    depends_on:
-      - redis
+#  redis:
+#    image: redis:alpine
+#    container_name: redis-key
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - redis-data:/data
+#
+#  redis-commander:
+#    image: rediscommander/redis-commander:latest
+#    container_name: redis-commander-container
+#    environment:
+#      - REDIS_HOSTS=local:redis:6379
+#    ports:
+#      - "8089:8081"
+#    depends_on:
+#      - redis
 volumes:
   mysql-data1:
   mysql-data2:
-  redis-data:
+#  redis-data:
 networks:
   default:
     driver: bridge

@@ -1,15 +1,15 @@
-package com.example.UrlShortner;
+package com.example.ApiGatway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@SpringBootApplication
 @EnableDiscoveryClient
-public class UrlShortnerApplication {
+@SpringBootApplication
+public class ApiGatwayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UrlShortnerApplication.class, args);
+		SpringApplication.run(ApiGatwayApplication.class, args);
 	}
 
 }
