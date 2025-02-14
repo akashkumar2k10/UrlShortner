@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+
+kind: Deployment
+metadata:
+  name: keygenrator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keygenrator
+  template:
+    metadata:
+      labels:
+        app: keygenrator
+    spec:
+      containers:
+        - name: keygenrator
+          image: akashkumar2k10/keygenrator:0.3
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keygenrator-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: keygenrator
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
