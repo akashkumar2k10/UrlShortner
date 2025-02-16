@@ -1,8 +1,5 @@
 package com.example.UrlShortner.util;
 
-import com.example.UrlShortner.Models.User;
-import com.example.UrlShortner.Repo.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;

@@ -1,16 +1,15 @@
 package com.example.UrlShortner.Repo;
 
-import com.example.UrlShortner.Models.User;
+import com.example.UrlShortner.Models.AUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.function.Predicate;
 
 @Repository
-public interface UserRepo extends JpaRepository<User,Integer> {
+public interface UserRepo extends JpaRepository<AUser,Integer> {
 
-    Optional<User> findByUserId(Integer userId);
+    Optional<AUser> findByUserId(Integer userId);
 
     Boolean existsByUserId(Integer userId);
 
