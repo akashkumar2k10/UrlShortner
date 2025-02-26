@@ -12,6 +12,4 @@ public interface AppUserService {
 
     AppUser getCurrentUser();
 
-
-
 }

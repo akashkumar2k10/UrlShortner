@@ -25,9 +25,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.servlet.http.HttpServletResponse;
 
-@RestController
-@RequestMapping("api/auth/")
-@CrossOrigin(origins = "*")
+//@RestController
+//@RequestMapping("api/auth/")
+//@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Value("${URL_SHORTNER_BASE_URL}")
