@@ -8,6 +8,8 @@ import com.example.KeyGenrator.Repos.UsedKeyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Date;
 
 @Service
@@ -22,13 +24,13 @@ public class KeyServiceImpl implements KeyService{
     UsedKeyRepo usedKeyRepo;
 
     @Override
-    public DtoKey getKey() {
+    public DtoKey getKey() throws UnknownHostException {
         long count = freshKeyRepo.getLength();
         if (count == 0) ramdomStringUtil.genrateFreshKey(10);
         else if (count < 20) ramdomStringUtil.genrateFreshKeyAysn(40);
         FreshKey fk = freshKeyRepo.findTopByOrderByGenratedDateDesc();
         freshKeyRepo.delete(fk);
         usedKeyRepo.save(new UsedKey(fk.getKeyString(),new Date()));
-        return new DtoKey(fk.getKeyString());
+        return new DtoKey(fk.getKeyString(), InetAddress.getLocalHost().getHostName());
     }
 }
