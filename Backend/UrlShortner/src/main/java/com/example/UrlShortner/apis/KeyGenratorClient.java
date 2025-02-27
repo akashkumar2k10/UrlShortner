@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(name = "keygenrator", url = "${KEY_BASE_URL:http://localhost:8080}")
 public interface KeyGenratorClient {
-    @GetMapping("/api/key") // Add the correct path
+    @GetMapping("keygenrator/api/key") // Add the correct path
     public DtoKey getkey();
 }
