@@ -1,0 +1,16 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: ConfigServer
+  security:
+    basic:
+      enabled: true
+    user:
+      name: configuser
+      password: configPass$1234
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/akashkumar2k10/UrlShortner-Config

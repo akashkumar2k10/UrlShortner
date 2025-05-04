@@ -18,6 +18,13 @@ spec:
           image: akashkumar2k10/keygenrator:latest
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "1"  
           livenessProbe:
             httpGet:
               path: keygenrator/actuator/health
@@ -36,7 +43,7 @@ kind: Service
 metadata:
   name: keygenrator-service
 spec:
-  type: NodePort   # ClusterIP,NodePort,LoadBalancer
+  type: LoadBalancer   # ClusterIP,NodePort,LoadBalancer
   selector:
     app: keygenrator
   ports:

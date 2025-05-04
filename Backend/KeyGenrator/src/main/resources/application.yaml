@@ -1,0 +1,9 @@
+spring:
+  config:
+    import: "optional:configserver:"
+  application:
+    name: KeyGenrator
+  cloud:
+    config:
+      uri: http://localhost:8089
+      profile: local
