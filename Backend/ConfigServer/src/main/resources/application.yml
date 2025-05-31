@@ -1,14 +1,8 @@
 server:
-  port: 8089
+  port: 8080
 spring:
   application:
     name: ConfigServer
-  security:
-    basic:
-      enabled: true
-    user:
-      name: configuser
-      password: configPass$1234
   cloud:
     config:
       server:
