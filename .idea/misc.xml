@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/Backend/KeyGenrator/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/UrlShortner/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/ConfigServer/pom.xml" />
       </list>
     </option>
   </component>

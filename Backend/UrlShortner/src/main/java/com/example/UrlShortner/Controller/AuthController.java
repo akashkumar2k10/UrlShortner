@@ -25,12 +25,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.servlet.http.HttpServletResponse;
 
-@RestController
-@RequestMapping("api/auth/")
-@CrossOrigin(origins = "*")
+//@RestController
+//@RequestMapping("api/auth/")
+//@CrossOrigin(origins = "*")
 public class AuthController {
 
-    @Value("${url.shortner.default.url}")
+    @Value("${URL_SHORTNER_BASE_URL}")
     String backendUrl;
     @Value("${frontend.url}")
     String frontendUrl;
@@ -123,7 +123,7 @@ public class AuthController {
         return response;
 //        if (response.getStatusCode() == HttpStatus.OK) {
 //            // Invalidate the session or clear any application-specific authentication state here.
-//            return ResponseEntity.ok("User logged out successfully.");
+//            return ResponseEntity.ok("AUser logged out successfully.");
 //        } else {
 //            return ResponseEntity.status(response.getStatusCode()).body("Failed to logout user.");
 //        }

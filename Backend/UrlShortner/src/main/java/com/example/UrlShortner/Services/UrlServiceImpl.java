@@ -9,6 +9,7 @@ import com.example.UrlShortner.Repo.MapShortLongUrlRepo;
 import com.example.UrlShortner.util.CommonUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -27,7 +28,7 @@ public class UrlServiceImpl implements UrlService{
     @Autowired
     AppUserService appUserService;
 
-    @Autowired
+    @Autowired @Qualifier("apiFeginServiceImpl")
     ApiService apiService;
 
 

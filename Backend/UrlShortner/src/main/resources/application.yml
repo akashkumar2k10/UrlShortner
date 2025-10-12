@@ -1,0 +1,10 @@
+spring:
+  config:
+    import: "optional:configserver:"
+  application:
+    name: UrlShortner
+  cloud:
+    config:
+      uri: http://localhost:8089
+      profile: local
+

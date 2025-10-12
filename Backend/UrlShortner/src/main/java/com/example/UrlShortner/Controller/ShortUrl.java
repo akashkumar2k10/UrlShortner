@@ -15,8 +15,6 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/s")
 public class ShortUrl {
 
-    String ErrorPage = "http://localhost:4200/error";
-
     @Autowired
     UrlService urlService;
 

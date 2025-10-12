@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+
+kind: Deployment
+metadata:
+  name: configserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configserver
+  template:
+    metadata:
+      labels:
+        app: configserver
+    spec:
+      containers:
+        - name: configserver
+          image: akashkumar2k10/configserver:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: configserver-service
+spec:
+  type: LoadBalancer   # ClusterIP,NodePort,LoadBalancer
+  selector:
+    app: configserver
+  ports:
+    - protocol: TCP
+      port: 8080  # Service port
+      targetPort: 8080  # Container port
