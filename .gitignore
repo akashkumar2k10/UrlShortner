@@ -1,1 +1,11 @@
 .idea/compiler.xml
+
+
+**/.DS_Store
+**/.mvn/**
+**/.gitignore
+Backend/.DS_Store
+.idea/encodings.xml
+.idea/misc.xml
+.idea/vcs.xml
+.vscode/settings.json

@@ -9,10 +9,10 @@ import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
-@Service
+//@Service
 public class ApiServiceImpl implements ApiService{
     @Autowired
-    @Qualifier("keyGenratorWebClient")
+//    @Qualifier("keyGenratorWebClient")
     private WebClient keyGenratorWebClient;
     @Override
     public String getKeys() {
